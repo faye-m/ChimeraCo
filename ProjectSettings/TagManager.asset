@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - mon_A_Top
+  - mon_B_Top
+  - mon_C_Top
+  - mon_D_Top
+  - mon_A_Mid
+  - mon_B_Mid
+  - mon_C_Mid
+  - mon_D_Mid
+  - mon_A_Bot
+  - mon_B_Bot
+  - mon_C_Bot
+  - mon_D_Bot
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
