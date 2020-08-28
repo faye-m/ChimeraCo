@@ -34,6 +34,14 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
     [SerializeField] private float currentDisplaySucessTimer = 0f;
     [SerializeField] private float turnOffSuccessDisplayTime = 0.5f;
 
+    //variables to access scoring and lives system
+    private cs_ScoringandGameOverHandlerScript scoreLivesHandler;
+
+    private void Awake() 
+    {
+        scoreLivesHandler = GetComponent<cs_ScoringandGameOverHandlerScript>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +84,10 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
             //code to display success here
             sCondDisplayImage.sprite = sCondSprites[0];
             sCondDisplayImage.enabled = true;
+
             //add points to player score here
+            scoreLivesHandler.AddtoScore();
+
             isMatching = false;
         }
 
