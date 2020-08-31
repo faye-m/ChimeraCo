@@ -34,6 +34,23 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
     [SerializeField] private float currentDisplaySucessTimer = 0f;
     [SerializeField] private float turnOffSuccessDisplayTime = 0.5f;
 
+    //variables to handle order timers
+    [SerializeField] private float maxWaitTime = 15f;
+    [SerializeField] private float Order1Timer;
+    [SerializeField] private float Order2Timer;
+    [SerializeField] private float Order3Timer;
+    [SerializeField] private float warning1Timer = 10f;
+    [SerializeField] private float warning2Timer = 5f;
+    [SerializeField] private float failTime = 0f;
+    [SerializeField] private float spawnTimer = 0f;
+    [SerializeField] private float spawnWaitTime = 10f;
+    [SerializeField] private bool gameJustStarted = true;
+
+    //variables that handle the timer bars on the display panels
+    [SerializeField] private Slider Order1Slider;
+    [SerializeField] private Slider Order2Slider;
+    [SerializeField] private Slider Order3Slider;
+
     //variables to access scoring and lives system
     private cs_ScoringandGameOverHandlerScript scoreLivesHandler;
 
@@ -46,6 +63,10 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
     void Start()
     {
         sCondDisplayImage.enabled = false;
+        gameJustStarted = true;
+        Order1Timer = maxWaitTime;
+        Order2Timer = maxWaitTime;
+        Order3Timer = maxWaitTime;
     }
     // Update is called once per frame
     void Update()
@@ -61,19 +82,19 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
 
     public void ConfirmSelectionButton()
     {
-        if (Order1[0] == monsterComponents[0].tag && Order1[1] == monsterComponents[1].tag && Order1[2] == monsterComponents[2].tag)
+        if (Order1.Count > 0 && Order1[0] == monsterComponents[0].tag && Order1[1] == monsterComponents[1].tag && Order1[2] == monsterComponents[2].tag)
         {
             isMatching = true;
             if (isMatching) ClearMonsterTypeOrder(Order1); 
         }
 
-        else if (Order2[0] == monsterComponents[0].tag && Order2[1] == monsterComponents[1].tag && Order2[2] == monsterComponents[2].tag)
+        if (Order2.Count > 0 && Order2[0] == monsterComponents[0].tag && Order2[1] == monsterComponents[1].tag && Order2[2] == monsterComponents[2].tag)
         {
             isMatching = true;
             if (isMatching) ClearMonsterTypeOrder(Order2);
         }
 
-        else if (Order3[0] == monsterComponents[0].tag && Order3[1] == monsterComponents[1].tag && Order3[2] == monsterComponents[2].tag)
+        if (Order3.Count > 0 && Order3[0] == monsterComponents[0].tag && Order3[1] == monsterComponents[1].tag && Order3[2] == monsterComponents[2].tag)
         {
             isMatching = true;
             if (isMatching) ClearMonsterTypeOrder(Order3);
@@ -94,6 +115,7 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
         else 
         {
             //code to display failure here and reduce amount of lives
+            scoreLivesHandler.RemoveLives();
             sCondDisplayImage.sprite = sCondSprites[1];
             sCondDisplayImage.enabled = true;
         }
@@ -132,19 +154,97 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
         for (int n = OrderList.Count - 1 ; n >= 0; n--) { OrderList.RemoveAt(n); }
     }
 
+    private void SetOrderTimer(float orderTimer)
+    {
+        orderTimer = maxWaitTime;
+    }
+
     private void SpawnOrderDetails() 
     {
         //check if corresponding lists are empty and if they are empty, respawns another set of component orders
-        if (Order1.Count == 0) RandomizeMonsterTypeOrder(Order1);
-        if (Order2.Count == 0) RandomizeMonsterTypeOrder(Order2);
-        if (Order3.Count == 0) RandomizeMonsterTypeOrder(Order3);
+        spawnTimer += Time.deltaTime;
+
+        if ((Order1.Count == 0 && Order2.Count == 0 && Order3.Count == 0) && gameJustStarted)
+        {
+            RandomizeMonsterTypeOrder(Order1);
+            Order1Timer = maxWaitTime;
+            gameJustStarted = false;
+            
+        }
+
+        else if (spawnTimer >= spawnWaitTime && !gameJustStarted && Order1.Count == 0)
+        {
+            RandomizeMonsterTypeOrder(Order1);
+            Order1Timer = maxWaitTime;
+            spawnTimer = 0;
+        }
+
+        else if (spawnTimer >= spawnWaitTime && !gameJustStarted && Order2.Count == 0)
+        {
+            RandomizeMonsterTypeOrder(Order2);
+            Order2Timer = maxWaitTime;
+            spawnTimer = 0;
+        }
+
+        else if (spawnTimer >= spawnWaitTime && !gameJustStarted && Order3.Count == 0)
+        {
+            RandomizeMonsterTypeOrder(Order3);
+            Order3Timer = maxWaitTime;
+            spawnTimer = 0;
+        }
+
+        if (Order1.Count > 0)
+        {
+            Order1Timer -= Time.deltaTime;
+            CheckOrderTimers(Order1, Order1Timer, Order1Slider);
+        }
+
+        if (Order2.Count > 0)
+        {
+            Order2Timer -= Time.deltaTime;
+            CheckOrderTimers(Order2, Order2Timer, Order2Slider);
+        }
+
+        if (Order3.Count > 0)
+        {
+            Order3Timer -= Time.deltaTime;
+            CheckOrderTimers(Order3, Order3Timer, Order3Slider);
+        }
+    }
+
+    private void CheckOrderTimers(List<string> OrderList, float orderTimer, Slider timeSlider)
+    {
+        timeSlider.value = (float)(orderTimer / maxWaitTime);
+
+        if (orderTimer <= failTime)
+        {
+            scoreLivesHandler.RemoveLives();
+            ClearMonsterTypeOrder(OrderList);
+        }
     }
 
     private void DisplayUIPanels()
     {
-        if (Order1.Count > 0) DisplayComponentOrders(Order1, Order1Images);
-        if (Order2.Count > 0) DisplayComponentOrders(Order2, Order2Images);
-        if (Order3.Count > 0) DisplayComponentOrders(Order3, Order3Images);
+        if (Order1.Count > 0) 
+        {
+            OrderListGO[0].SetActive(true);
+            DisplayComponentOrders(Order1, Order1Images);
+        }
+        else OrderListGO[0].SetActive(false);
+
+        if (Order2.Count > 0)
+        {
+            OrderListGO[1].SetActive(true);
+            DisplayComponentOrders(Order2, Order2Images);
+        }
+        else OrderListGO[1].SetActive(false);
+
+        if (Order3.Count > 0)
+        {
+            OrderListGO[2].SetActive(true);
+            DisplayComponentOrders(Order3, Order3Images);
+        }
+        else OrderListGO[2].SetActive(false);
     }
 
     private void DisplayComponentOrders(List<string> OrderList, Image[] OrderImages) 
