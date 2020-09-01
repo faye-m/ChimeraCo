@@ -51,6 +51,11 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
     [SerializeField] private Slider Order2Slider;
     [SerializeField] private Slider Order3Slider;
 
+    //variables to handle scaling the difficulty of the game over time
+    [SerializeField] private float difficultyAdjustmentTime = 45f;
+    [SerializeField] private float currentGameTime = 0f;
+    [SerializeField] private float minSpawnWaitTime = 5f;
+
     //variables to access scoring and lives system
     private cs_ScoringandGameOverHandlerScript scoreLivesHandler;
 
@@ -67,12 +72,14 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
         Order1Timer = maxWaitTime;
         Order2Timer = maxWaitTime;
         Order3Timer = maxWaitTime;
+        currentGameTime = 0f;
     }
     // Update is called once per frame
     void Update()
     {
         SpawnOrderDetails();
         HandleDisplaySuccessCondition();
+        DifficultyAdjustment();
     }
 
     private void LateUpdate()
@@ -118,6 +125,22 @@ public class cs_MonsterComponentOrderRandomizerScript : MonoBehaviour
             scoreLivesHandler.RemoveLives();
             sCondDisplayImage.sprite = sCondSprites[1];
             sCondDisplayImage.enabled = true;
+        }
+    }
+
+    private void DifficultyAdjustment()
+    {
+        currentGameTime += Time.deltaTime;
+
+        if (currentGameTime >= difficultyAdjustmentTime)
+        {
+            currentGameTime = 0f;
+            spawnWaitTime--;
+
+            if (spawnWaitTime <= minSpawnWaitTime)
+            {
+                spawnWaitTime = spawnWaitTime;
+            }
         }
     }
 
