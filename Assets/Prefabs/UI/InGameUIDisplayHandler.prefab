@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5161817285854516435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5161817285854516433}
+  - component: {fileID: 5161817285854516438}
+  - component: {fileID: 5161817285854516432}
+  - component: {fileID: 5161817285854516439}
+  m_Layer: 0
+  m_Name: InGameUIDisplayHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5161817285854516433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161817285854516435}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.81, z: -5.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5161817285854516438
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161817285854516435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5161817285854516432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161817285854516435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3182a6acec85254abbd205915b9c099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topcomponentTags:
+  - mon_A_Top
+  - mon_B_Top
+  - mon_C_Top
+  - mon_D_Top
+  midcomponentTags:
+  - mon_A_Mid
+  - mon_B_Mid
+  - mon_C_Mid
+  - mon_D_Mid
+  botcomponentTags:
+  - mon_A_Bot
+  - mon_B_Bot
+  - mon_C_Bot
+  - mon_D_Bot
+  maxArrayRange: 0
+  randomNumber: 0
+  Order1: []
+  Order2: []
+  Order3: []
+  OrderListGO:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Order1Images:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Order2Images:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Order3Images:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mcTopSprites:
+  - {fileID: -6756791224529097202, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -7813441604043810538, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: 4426776136379115210, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -4390734848388757675, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  mcMidSprites:
+  - {fileID: -2436811927399254771, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -8084516401231342876, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -7251224169625761917, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -1897781952641776505, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  mcBotSprites:
+  - {fileID: -607616210901458178, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: 211729060530192499, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -7463536371763086569, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  - {fileID: -8307103905814352003, guid: 02743ad7134a8244eaa0c241bd142eb8, type: 3}
+  monsterComponents:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isMatching: 0
+  sCondDisplayImage: {fileID: 0}
+  sCondSprites:
+  - {fileID: -6680375071290902936, guid: ac724d0c4e165ec4ebe683c64402bdc2, type: 3}
+  - {fileID: -822218971094137476, guid: ac724d0c4e165ec4ebe683c64402bdc2, type: 3}
+  currentDisplaySucessTimer: 0
+  turnOffSuccessDisplayTime: 0.5
+  maxWaitTime: 15
+  Order1Timer: 0
+  Order2Timer: 0
+  Order3Timer: 0
+  warning1Timer: 10
+  warning2Timer: 5
+  failTime: 0
+  spawnTimer: 0
+  spawnWaitTime: 10
+  gameJustStarted: 1
+  Order1Slider: {fileID: 0}
+  Order2Slider: {fileID: 0}
+  Order3Slider: {fileID: 0}
+  difficultyAdjustmentTime: 45
+  currentGameTime: 0
+  minSpawnWaitTime: 5
+--- !u!114 &5161817285854516439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161817285854516435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045a1cc0481013846ab7a51fb6dc3365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScore: 0
+  defaultScore: 0
+  scoreAddition: 100
+  scoreText: {fileID: 0}
+  currentPLives: 0
+  maxPLives: 3
+  minPLives: 0
+  isDead: 0
+  lifeImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
